@@ -10,15 +10,16 @@ return new class extends Migration {
      */
     public function up()
     {
-        if (!Schema::hasTable('medicines')) { // ตรวจสอบว่าตาราง medicines มีอยู่แล้วหรือไม่
+        if (!Schema::hasTable('medicines')) {
             Schema::create('medicines', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
-                $table->string('brand'); // เพิ่มคอลัมน์ brand
+                $table->string('brand');
                 $table->text('description');
                 $table->decimal('price', 10, 2);
                 $table->unsignedBigInteger('category_id');
                 $table->integer('stock_quantity');
+                $table->string('image')->nullable();
                 $table->timestamps();
 
                 $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
